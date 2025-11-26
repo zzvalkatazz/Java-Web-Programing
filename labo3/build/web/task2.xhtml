@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+      
+      <h:head>
+          <title>Моят профил</title>
+    
+      <title>Моят Профил</title>
+      <style>
+      body {font-family: Arial;margin: 20px}
+      .image{margin: 10px;border:2px solid #ccc;}
+      .info-grid{border-collapse: collapse; margin-top:15px;}
+      .label {font-weight: bold; background-color: #f9f9f9;}
+      </style>
+      </h:head>
+    <h:body>
+          <h2>Моя снимка</h2>
+          <h:graphicImage name="images/my_photo.jpg" width="140"/>
+          <h3>Лична информация</h3>
+          <h:panelGrid columns="2" styleClass="info-grid">
+              
+              <h:outputText value="Име:"/>
+              <h:outputText value="Валентин Колев"/>
+              
+               <h:outputText value="ФН:"/>
+              <h:outputText value="8MI3400795"/>
+              
+               <h:outputText value="Курс:"/>
+              <h:outputText value="1"/>
+              
+               <h:outputText value="Специалност:"/>
+              <h:outputText value="Защита на информацията в компютърни системи и мрежи"/>
+              
+          </h:panelGrid>
+          <h3>Възраст</h3>
+          <h:panelGrid columns="2" styleClass="info-grid">
+              <h:outputText value="Дата на раждане:" styleClass="label"/>
+              <h:outputText value ="#{countAges.birthDate}">
+                 
+              </h:outputText>
+              
+              <h:outputText value="Години:" styleClass="label"/>
+              <h:outputText value="#{countAges.age}"/>
+          </h:panelGrid>  
+              
+              
+          <h4>Интереси</h4>
+          <ul>
+              <li>Java и Web технологии</li>
+              <li>C++</li>
+              <li>SQL</li>
+          </ul>
+          
+          <h3>Лични хобита</h3>
+          <ul>
+          <li>Плуване</li>
+          <li>Маратонно тичане</li>
+          <li>Пътуване в чужбина</li>  
+          </ul>
+          
+          <h5>Галерия</h5>
+           <h:graphicImage name="images/wizzair1.jpg" width="140"/>
+            <h:graphicImage name="images/wizzair2.jpg" width="140"/>
+            
+           <br /><br />
+           <h:link value="Обратно към начало" outcome="task1"/>
+    </h:body>
+    
+</html>

@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+<h:link outcome="index" value="BG">
+    <f:param name="lang" value="bg"/>
+</h:link>
+ |
+<h:link outcome="index" value="EN">
+    <f:param name="lang" value="en"/>
+</h:link>
+<br/><br/>
+    <head>
+        <title>
+            <h:outputText value="#{i18n['index.title']}"/>
+        </title>
+    </head>
+
+    <body>
+        <f:view locale="#{param.lang}">
+            <p>Heaven-o my friend!</p><br/>
+
+            <h:outputText value="#{i18n['index.helloworld']}" /><br/>
+
+            <h:outputLink id="link01" value="#{i18n['index.link']}">
+                <h:outputText value="#{i18n['index.linkdescription']}" />
+            </h:outputLink><br/><br/>
+
+            <h:outputFormat value="#{i18n['formattedMessage']}">
+                <f:param value="Milen"/>
+                <f:param value="555-666"/>
+            </h:outputFormat><br/><br/>
+
+            <h:graphicImage value="#{i18n['imagePath']}" />
+        </f:view>
+    </body>
+</html>
