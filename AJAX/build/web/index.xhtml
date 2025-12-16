@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+    <title>JSF Ajax Counter</title>
+    <!-- Вградена поддръжка на Ajax: jsf.js от библиотеката javax.faces -->
+    <h:outputScript name="jsf.js" library="javax.faces" target="head" />
+</h:head>
+
+<h:body>
+    <h:form id="form">
+  <h:panelGrid id="infoTable" columns="3" border="1" cellpadding="5">
+
+            <h:outputText value="#{order.discountText}" />
+
+            <h:outputText value="Отстъпки:" />
+
+            
+            <h:outputText id="count" value="#{order.count}" />
+
+        </h:panelGrid>
+      
+       <br/>
+       <h:panelGrid columns="2">
+           <h:outputText value="All sum"/>
+           <h:outputText id="total" value="#{order.total}"/> 
+       </h:panelGrid>
+       <br/>
+       
+       <h:commandButton id="btnCount" value="Count" action="#{order.increment}">
+           <f:ajax execute="@this" render="infoTble total"/>
+       </h:commandButton>
+       
+       <br/><br/>
+          <h:commandButton id="btnReset" value="Reset" action="#{order.reset}">
+           <f:ajax execute="@this" render="infoTble total"/>
+       </h:commandButton>         
+    </h:form>
+</h:body>
+</html>
