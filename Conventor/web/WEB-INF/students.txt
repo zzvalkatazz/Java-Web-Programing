@@ -1,0 +1,3 @@
+fn82230,Valentin,Kolev,1,2,milenov@uni-sofia.bg
+fn82166,Ivan,Ivanov,2,1,ivan@uni-sofia.bg
+fn81118,Maria,Petrova,1,3,maria@uni-sofia.bg
