@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <title>EGN Validator</title>
+</h:head>
+    
+    <h:body>
+        <h:form>
+              <h:panelGrid columns="2">
+        <h:outputLabel for="egn" value="Въведете ЕГН:" />
+        <h:inputText id="egn" value="#{personBean.egn}">
+             <f:validator validatorId="egnValidator" />
+
+            <f:ajax event="blur"
+                    listener="#{personBean.updateFromComponent(component)}"
+                    render="messages greeting" />
+                
+        </h:inputText>
+
+        <h:message for="egn" style="color:red" id="messages"/>
+    </h:panelGrid>
+
+    <h:commandButton value="Провери"
+                     action="#{personBean.processEgn}">
+        <f:ajax execute="@form" render="greeting messages"/>
+    </h:commandButton>
+
+    <h:panelGroup id="greeting">
+        <h:outputText value="#{personBean.greeting}" />
+    </h:panelGroup>
+        </h:form>   
+  
+    </h:body>   
+ </html>
