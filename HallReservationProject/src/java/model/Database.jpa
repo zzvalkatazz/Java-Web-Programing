@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<jpa:entity-mappings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:java="http://jcp.org/en/jsr/detail?id=270" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:jpa="http://java.sun.com/xml/ns/persistence/orm" ptype="MONOLITH" ppkg="model" epkg="model" v="5.0" rws="_17653910661614" Pws="_17653910661614" cws="_17653910661614" persistenceUnitName="DEFAULT_PU" sm="false" xs="false" id="_17653910661613" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm orm_2_1.xsd">
+    <jpa:entity compositePrimaryKeyClass="UserPK" abs="false" class="User" v="true" jbn="false" xre="false" m="false" rootElement="_17653910661613" id="_17653910732315">
+        <jpa:ath>vk300</jpa:ath>
+        <jpa:attributes>
+            <jpa:basic attribute-type="String" v="true" xvt="" name="username" id="_176539114076714">
+                <jpa:xwm/>
+                <jpa:xm/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" v="true" xvt="" name="password" id="_176539129380615">
+                <jpa:xwm/>
+                <jpa:xm/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" v="true" xvt="" name="fullName" id="_176539133636716">
+                <jpa:xwm/>
+                <jpa:xm/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" v="true" xvt="" name="email" id="_176539136130117">
+                <jpa:xwm/>
+                <jpa:xm/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" v="true" xvt="" name="role" id="_176539136537618">
+                <jpa:xwm/>
+                <jpa:xm/>
+            </jpa:basic>
+            <jpa:one-to-many orp="false" own="true" collection-type="java.util.List" cit="java.util.ArrayList" connected-entity-id="_176539107721111" v="true" xvt="" name="reservations" id="_176539164042332">
+                <jpa:xwm/>
+                <jpa:xm/>
+                <jpa:join-column name="USER_ID" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:one-to-many>
+            <jpa:id attribute-type="Long" v="true" xvt="" name="id" id="_17653910732846">
+                <jpa:xwm/>
+                <jpa:xm/>
+                <jpa:generated-value strategy="AUTO"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:nq e="false" name="User.findAll">
+            <jpa:query>Select e from User e</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="User.findByUsername">
+            <jpa:query>Select u from User u where u.username=:username</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="User.findByPassword">
+            <jpa:query>Select u from User u where u.password=:password</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="User.findByFullName">
+            <jpa:query>Select u from User u where u.fullName=:fullName</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="User.findByEmail">
+            <jpa:query>Select u from User u where u.email=:email</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="User.findByRole">
+            <jpa:query>Select u from User u where u.role=:role</jpa:query>
+        </jpa:nq>
+    </jpa:entity>
+    <jpa:entity compositePrimaryKeyClass="HallPK" abs="false" class="Hall" v="true" jbn="false" xre="false" m="false" rootElement="_17653910661613" id="_17653910753918">
+        <jpa:ath>vk300</jpa:ath>
+        <jpa:attributes>
+            <jpa:basic attribute-type="String" v="true" xvt="" name="name" id="_176539138302919">
+                <jpa:xwm/>
+                <jpa:xm/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" v="true" xvt="" name="location" id="_176539138397320">
+                <jpa:xwm/>
+                <jpa:xm/>
+            </jpa:basic>
+            <jpa:basic attribute-type="Integer" v="true" xvt="" name="capacity" id="_176539138432521">
+                <jpa:xwm/>
+                <jpa:xm/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" v="true" xvt="" name="type" id="_176539138451722">
+                <jpa:xwm/>
+                <jpa:xm/>
+            </jpa:basic>
+            <jpa:one-to-many orp="false" own="true" collection-type="java.util.List" cit="java.util.ArrayList" connected-entity-id="_176539107721111" v="true" xvt="" name="reservations" id="_176539162061430">
+                <jpa:xwm/>
+                <jpa:xm/>
+                <jpa:join-column name="HALL_ID" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:one-to-many>
+            <jpa:id attribute-type="Long" v="true" xvt="" name="id" id="_17653910753919">
+                <jpa:xwm/>
+                <jpa:xm/>
+                <jpa:generated-value strategy="AUTO"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:nq e="false" name="Hall.findAll">
+            <jpa:query>Select e from Hall e</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Hall.findByName">
+            <jpa:query>Select h from Hall h where h.name=:name</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Hall.findByLocation">
+            <jpa:query>Select h from Hall h where h.location=:location</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Hall.findByCapacity">
+            <jpa:query>Select h from Hall h where h.capacity=:capacity</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Hall.findByType">
+            <jpa:query>Select h from Hall h where h.type=:type</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Hall.findByAttribute4">
+            <jpa:query>Select h from Hall h where h.attribute4=:attribute4</jpa:query>
+        </jpa:nq>
+    </jpa:entity>
+    <jpa:entity compositePrimaryKeyClass="ReservationPK" abs="false" class="Reservation" v="true" jbn="false" xre="false" m="false" rootElement="_17653910661613" id="_176539107721111">
+        <jpa:ath>vk300</jpa:ath>
+        <jpa:attributes>
+            <jpa:basic attribute-type="java.time.LocalDateTime" v="true" xvt="" name="startTime" id="_176539146018024">
+                <jpa:xwm/>
+                <jpa:xm/>
+            </jpa:basic>
+            <jpa:basic attribute-type="java.time.LocalDateTime" v="true" xvt="" name="endTime" id="_176539146046925">
+                <jpa:xwm/>
+                <jpa:xm/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" v="true" xvt="" name="eventType" id="_176539146079026">
+                <jpa:xwm/>
+                <jpa:xm/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" v="true" xvt="" name="status" id="_176539146114227">
+                <jpa:xwm/>
+                <jpa:xm/>
+            </jpa:basic>
+            <jpa:basic attribute-type="java.time.LocalDateTime" v="true" xvt="" name="createdAt" id="_176539146151228">
+                <jpa:xwm/>
+                <jpa:xm/>
+            </jpa:basic>
+            <jpa:id attribute-type="Long" v="true" xvt="" name="id" id="_176539107721112">
+                <jpa:xwm/>
+                <jpa:xm/>
+                <jpa:generated-value strategy="AUTO"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:nq e="false" name="Reservation.findAll">
+            <jpa:query>Select e from Reservation e</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Reservation.findByStartTime">
+            <jpa:query>Select e from Reservation e where e.startTime=:startTime</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Reservation.findByEndTime">
+            <jpa:query>Select e from Reservation e where e.endTime=:endTime</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Reservation.findByEventType">
+            <jpa:query>Select e from Reservation e where e.eventType=:eventType</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Reservation.findByStatus">
+            <jpa:query>Select e from Reservation e where e.status=:status</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Reservation.findByCreatedAt">
+            <jpa:query>Select e from Reservation e where e.createdAt=:createdAt</jpa:query>
+        </jpa:nq>
+    </jpa:entity>
+    <jpa:c>
+        <db u="jdbc:mysql://localhost:3306/mysql?zeroDateTimeBehavior=convertToNull" n="root" p="" d="com.mysql.jdbc.Driver"/>
+    </jpa:c>
+    <jpa:wsl>
+        <jpa:ws n="Main" id="_17653910661614">
+            <i ref="_17653910732315" x="305" y="41"/>
+            <i ref="_176539107721111" x="57" y="159"/>
+            <i ref="_17653910753918" x="520" y="159"/>
+        </jpa:ws>
+    </jpa:wsl>
+</jpa:entity-mappings>
