@@ -51,7 +51,7 @@ public boolean requestReservation(User user, Hall hall, LocalDateTime start, Loc
             em.getTransaction().rollback();
             return false;
         }
-
+    
         Reservation r = new Reservation();
         r.setUser(managedUser);
         r.setHall(managedHall);
@@ -60,17 +60,19 @@ public boolean requestReservation(User user, Hall hall, LocalDateTime start, Loc
         r.setEventType(eventType);
         r.setStatus("PENDING");
         r.setCreatedAt(LocalDateTime.now());
-
+     System.out.println("VALIDATOR HIT: start=" + start + ", end=" + end);
         em.persist(r);
         em.getTransaction().commit();
         return true;
-
+         
     } catch (Exception ex) {
         if (em.getTransaction().isActive()) em.getTransaction().rollback();
         throw ex;
     } finally {
         em.close();
     }
+    
+    
 }
 
 public List<Reservation> findPending(){
@@ -118,5 +120,52 @@ public Reservation findLatestForUserAndHall(Long userId,Long hallId){
        em.close();
    }
 }
+public List<Reservation> findForUser(Long userId){
+    if(userId == null) return java.util.Collections.emptyList();
+    
+    EntityManager em = getEmf().createEntityManager();
+    try{
+        return em.createQuery(
+          "SELECT r FROM Reservation r " +
+            "WHERE r.user.id = :uid " +
+            "ORDER BY r.createdAt DESC",Reservation.class
+        ).setParameter("uid",userId).getResultList();
+    }finally{
+        em.close();
+    }
+}
 
+public boolean cancelReservation(Long reservationId, Long userId){
+    if(reservationId == null || userId == null) return false;
+    
+    EntityManager em =getEmf().createEntityManager();
+    try{
+        em.getTransaction().begin();
+        Reservation r = em.find(Reservation.class,reservationId);
+        if(r == null){
+            em.getTransaction().rollback();
+            return false;
+        }
+        
+        if(r.getUser() == null || r.getUser().getId()== null || !r.getUser().getId().equals(userId)){
+            em.getTransaction().rollback();
+            return false;
+        }
+        
+        String st = r.getStatus();
+        if(!"Pending".equals(st) && !"APPROVED".equals(st)){
+            em.getTransaction().rollback();
+            return false;
+        }
+        r.setStatus("CANCELED");
+        
+        em.getTransaction().commit();
+        return true;
+    }catch(Exception ex){
+        if(em.getTransaction().isActive()) em.getTransaction().rollback();
+        throw ex;
+    }finally{
+        em.close();
+    }
+}
 }

@@ -112,5 +112,12 @@ public String userReservationInfo(Hall h){
  return status + "(" + start +"-" +end +")";
 }
  
- 
+ public String userReservationStatus(Hall hall){
+     Long u =loginBean.getLoggedUser().getId();
+     if(u == null || hall == null) return null;
+     
+    Reservation r = reservationService.findLatestForUserAndHall(u, hall.getId());
+    
+    return(r == null) ? null : r.getStatus(); 
+ }
 }

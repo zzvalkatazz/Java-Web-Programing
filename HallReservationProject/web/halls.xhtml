@@ -6,6 +6,13 @@
 
 <h:head>
     <title>Зали</title>
+    <style>
+.status-pending  { color: #d4a100; font-weight: bold; }  
+.status-approved { color: #2e7d32; font-weight: bold; } 
+.status-rejected { color: #c62828; font-weight: bold; }
+.status-canceled { color: #ffa500; font-weight: bold; } 
+</style>
+
 </h:head>
 
 <h:body>
@@ -62,10 +69,15 @@
                  process="@this"
                  immediate="true"/>
 
-
+             <p:commandButton value="Моите резервации"
+                 icon="pi pi-history"
+                 action="/myReservations.xhtml?faces-redirect=true"
+                 rendered="#{loginBean.user}"
+                 ajax="false"
+                 style="margin-left:10px"/>  
             </p:toolbarGroup>
         </p:toolbar>
- 
+             
         <p:dataTable id="table"
                      value="#{hallBean.halls}"
                      var="h"
@@ -110,11 +122,18 @@
                  styleClass="ui-button-danger"/>
 
             </p:column>
-<p:column headerText="Резервация" rendered="#{loginBean.user}" style="width:260px">
-    <h:outputText value="#{hallBean.userReservationInfo(h)}" />
+<p:column headerText="Резервация" rendered="#{loginBean.user}" style="width:260px;text-align:center">
 
-
+    <h:outputText value="#{hallBean.userReservationInfo(h)}"
+                  styleClass="#{
+                      hallBean.userReservationStatus(h) eq 'PENDING'  ? 'status-pending'  :
+                      hallBean.userReservationStatus(h) eq 'APPROVED' ? 'status-approved' :
+                      hallBean.userReservationStatus(h) eq 'REJECTED' ? 'status-rejected' :
+                       hallBean.userReservationStatus(h) eq 'CANCELED' ? 'status-canceled' :
+                      ''
+                  }"/>
 </p:column>
+
         </p:dataTable>
 
     </p:panel>

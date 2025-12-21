@@ -47,15 +47,27 @@
                           required="true"
                           style="width:100%" />
 
-            <!-- КРАЙ -->
+            <p:message for="startDt" />
             <h:outputText value="Край:" />
-            <p:datePicker id="endDt"
-                          value="#{reservationBean.endDate}"
-                          showTime="true"
-                          hourFormat="24"
-                          pattern="dd.MM.yyyy HH:mm"
-                          required="true"
-                          style="width:100%" />
+    <p:datePicker id="endDt"
+              value="#{reservationBean.endDate}"
+              showTime="true"
+              hourFormat="24"
+              pattern="dd.MM.yyyy HH:mm"
+              required="true">
+
+    <f:validator validatorId="dateRangeValidator"/>
+    <f:attribute name="start" value="#{reservationBean.startDate}"/>
+
+    <p:ajax event="dateSelect"
+            process="startDt endDt"
+            update="msgs endMsg"/>
+</p:datePicker>
+
+<p:message id="endMsg" for="endDt"/>
+
+
+
 
             <!-- ТИП -->
             <h:outputText value="Тип събитие:" />
@@ -66,13 +78,12 @@
         <p:separator/>
 
        <p:commandButton value="Заяви"
-                             icon="pi pi-send"
-                             action="#{reservationBean.requestReservation}"
-                             onclick="return confirm('Сигурен ли си?');"
-                             process="@form"
-                             ajax="false"
-                             style="width:100%"
-                             rendered="#{loginBean.user}" />
+                 icon="pi pi-send"
+                 action="#{reservationBean.requestReservation}"
+                 process="@form"
+                 update="@form"
+                 style="width:100%"
+                 rendered="#{loginBean.user}" />
     </p:panel>
 </h:form>
 
