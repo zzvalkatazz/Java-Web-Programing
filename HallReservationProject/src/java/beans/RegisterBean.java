@@ -47,7 +47,7 @@ public class RegisterBean {
           
        User u = userService.register(username.trim(), password, fullName.trim(), email.trim());
           if(u == null){
-              msgError("Това име вече е заето");
+              msgError("заето потребителско име/email");
               return null;
           }
            FacesContext.getCurrentInstance().addMessage(null,

@@ -13,7 +13,12 @@ and open the template in the editor.
 <h:head>
     <title>Моите резервации</title>
 </h:head>
-
+    <style>
+.status-pending  { color: #d4a100; font-weight: bold; }  
+.status-approved { color: #2e7d32; font-weight: bold; } 
+.status-rejected { color: #c62828; font-weight: bold; }
+.status-canceled { color: #ffa500; font-weight: bold; } 
+</style>
 <h:body>
 
 <h:form id="myForm">
@@ -50,9 +55,17 @@ and open the template in the editor.
             </p:column>
 
             <p:column headerText="Статус" style="width:130px;text-align:center">
-                <h:outputText value="#{r.status}"/>
+                <h:outputText value="#{r.status}"
+                 styleClass="#{
+                      r.status eq 'PENDING'  ? 'status-pending'  :
+                      r.status eq 'APPROVED' ? 'status-approved' :
+                      r.status eq 'REJECTED' ? 'status-rejected' :
+                       r.status eq 'CANCELED' ? 'status-canceled' :
+                      ''
+                  }"/>
+                
             </p:column>
-
+      
             <p:column headerText="Действия" style="width:160px;text-align:center">
                 <p:commandButton value="Отмени"
                  icon="pi pi-ban"
