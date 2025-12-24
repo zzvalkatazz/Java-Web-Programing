@@ -168,4 +168,66 @@ public boolean cancelReservation(Long reservationId, Long userId){
         em.close();
     }
 }
+
+public List<Reservation> findAll(){
+    EntityManager em = getEmf().createEntityManager();
+    try{
+        return em.createQuery(
+        "SELECT r FROM Reservation r " +
+            "JOIN FETCH r.user " +
+            "JOIN FETCH r.hall " +
+            "ORDER BY r.createdAt DESC",Reservation.class
+        ).getResultList();
+    }finally{
+        em.close();
+    }
+}
+
+public boolean approveReservation(Long reservationId){
+    EntityManager em = getEmf().createEntityManager();
+    try{
+        em.getTransaction().begin();
+        
+        Reservation r = em.find(Reservation.class, reservationId);
+        if(r == null){
+            em.getTransaction().rollback();
+            return false;
+        }
+        if("APPROVED".equals(r.getStatus())){
+            em.getTransaction().commit(); return true;
+        }
+        
+        Long hallId = r.getHall().getId();
+        java.time.LocalDateTime start = r.getStartTime();
+        java.time.LocalDateTime end = r.getEndTime();
+        
+       
+        Long cnt = em.createQuery(
+            "SELECT COUNT(x) FROM Reservation x " +
+            "WHERE x.hall.id = :hid " +
+            "AND x.status = 'APPROVED' " +
+            "AND x.id <> :rid " +
+            "AND x.startTime < :end AND x.endTime > :start",
+            Long.class
+        ).setParameter("hid",hallId)
+                .setParameter("rid",reservationId)
+                .setParameter("start", start)
+                .setParameter("end", end)
+                .getSingleResult();
+        
+        if(cnt != null && cnt>0){
+            em.getTransaction().rollback();
+            return false;
+        }
+        
+        r.setStatus("APPROVED");
+        em.getTransaction().commit();
+        return true;
+    }catch(Exception ex){
+        if(em.getTransaction().isActive()) em.getTransaction().rollback();
+        throw ex;
+    }finally{
+        em.close();
+    }
+}
 }

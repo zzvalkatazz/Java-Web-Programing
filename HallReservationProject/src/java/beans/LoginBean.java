@@ -50,6 +50,9 @@ public class LoginBean implements Serializable{
   public boolean isUser(){
      return loggedUser != null && "USER".equalsIgnoreCase(loggedUser.getRole());
  }
+  public boolean isCanReserve(){
+    return loggedUser != null && ("USER".equals(loggedUser.getRole()) || "ADMIN".equals(loggedUser.getRole()));
+}
  public String getUsername(){
      return username;
  }

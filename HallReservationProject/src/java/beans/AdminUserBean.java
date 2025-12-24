@@ -6,6 +6,7 @@
 package beans;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -27,14 +28,16 @@ public class AdminUserBean implements Serializable{
     private List<User> users;
     private String generatedPassword;
     private String generatedForUser;
+    private String globalFilter;
     
     public void load(){
         if(loginBean == null || !loginBean.isAdmin()){
-            users = java.util.Collections.emptyList();
+            users = new ArrayList<>();
             return;
         }
         users = userService.findAllUsers();
     }
+    
     public void resetPasswordFor(User u){
         if( u == null || u.getId() == null) return;
         
@@ -60,6 +63,14 @@ public class AdminUserBean implements Serializable{
     public List<User> getUsers(){return users;}
     public String getGeneratedPassword() {return generatedPassword;}
     public String getGeneratedForUser(){return generatedForUser;}
-    
+    public String getGlobalFilter(){
+        return globalFilter;
+    }
     public void setLoginBean(LoginBean loginBean) { this.loginBean = loginBean; }
+    
+    public void setGlobalFilter(String globalFilter) {
+    this.globalFilter = globalFilter;
+}
+    
+
 }

@@ -35,6 +35,14 @@
                  process="@this"
                  ajax="false"
                  style="margin-left:10px"/>
+    <p:commandButton value="История на заявки"
+                 icon="pi pi-list"
+                 action="/adminReservationsHistory.xhtml?faces-redirect=true"
+                 rendered="#{loginBean.admin}"
+                 immediate="true"
+                 process="@this"
+                 ajax="false"
+                 style="margin-left:10px"/>
     <p:commandButton value="Потребители"
                  icon="pi pi-users"
                  action="/adminUsers.xhtml?faces-redirect=true"
@@ -43,7 +51,16 @@
                  process="@this"
                  ajax="false"
                  style="margin-left:10px"/>
- 
+    <p:commandButton value="Смяна на парола"
+                 icon="pi pi-lock"
+                 action="/changePassword.xhtml?faces-redirect=true"
+                 rendered="#{loginBean.user}"
+                 immediate="true"
+                 process="@this"
+                 ajax="false"
+                 style="margin-left:10px"/>
+   
+
 <p:panel rendered="#{loginBean.user}"
          style="max-width:1000px;margin:10px auto;background:#f7f7f7">
 
@@ -67,7 +84,9 @@
  <p:commandButton value="Заяви резервация"
                  icon="pi pi-calendar-plus"
                  action="/reservation.xhtml?faces-redirect=true"
-                 rendered="#{loginBean.user}" />
+                 rendered="#{loginBean.canReserve}" 
+                 process="@this"/>
+ 
             </p:toolbarGroup>
               
             <p:toolbarGroup align="right">

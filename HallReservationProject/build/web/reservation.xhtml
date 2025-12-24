@@ -24,7 +24,7 @@
 
         <p:panelGrid columns="2" columnClasses="label,value" style="width:100%">
 
-            <!-- ЗАЛА -->
+            
             <h:outputText value="Зала:" />
             <p:selectOneMenu value="#{reservationBean.hallId}"
                              required="true"
@@ -83,7 +83,7 @@
                  process="@form"
                  update="@form"
                  style="width:100%"
-                 rendered="#{loginBean.user}" />
+                 rendered="#{loginBean.canReserve}" />
     </p:panel>
 </h:form>
 

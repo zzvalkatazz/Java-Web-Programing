@@ -7,12 +7,12 @@
             <file>file:/C:/NetBeansProject/HallReservationProject/src/java/service/ReservationService.java</file>
             <file>file:/C:/NetBeansProject/HallReservationProject/web/adminReservations.xhtml</file>
             <file>file:/C:/NetBeansProject/HallReservationProject/src/java/beans/UserReservationBean.java</file>
-            <file>file:/C:/NetBeansProject/HallReservationProject/web/WEB-INF/web.xml</file>
+            <file>file:/C:/NetBeansProject/HallReservationProject/web/adminUsers.xhtml</file>
             <file>file:/C:/NetBeansProject/HallReservationProject/src/java/service/HallService.java</file>
-            <file>file:/C:/NetBeansProject/HallReservationProject/src/conf/persistence.xml</file>
             <file>file:/C:/NetBeansProject/HallReservationProject/web/myReservations.xhtml</file>
             <file>file:/C:/NetBeansProject/HallReservationProject/src/java/model/model/Hall.java</file>
             <file>file:/C:/NetBeansProject/HallReservationProject/src/java/beans/AdminReservationBean.java</file>
+            <file>file:/C:/NetBeansProject/HallReservationProject/src/java/beans/AdminUserBean.java</file>
             <file>file:/C:/NetBeansProject/HallReservationProject/web/halls.xhtml</file>
             <file>file:/C:/NetBeansProject/HallReservationProject/src/java/beans/HallBean.java</file>
             <file>file:/C:/NetBeansProject/HallReservationProject/src/java/model/model/Reservation.java</file>
@@ -20,6 +20,8 @@
             <file>file:/C:/NetBeansProject/HallReservationProject/web/register.xhtml</file>
             <file>file:/C:/NetBeansProject/HallReservationProject/src/java/model/model/LocalDateTimeConverter.java</file>
             <file>file:/C:/NetBeansProject/HallReservationProject/src/java/beans/RegisterBean.java</file>
+            <file>file:/C:/NetBeansProject/HallReservationProject/web/WEB-INF/web.xml</file>
+            <file>file:/C:/NetBeansProject/HallReservationProject/src/conf/persistence.xml</file>
             <file>file:/C:/NetBeansProject/HallReservationProject/src/java/service/UserService.java</file>
             <file>file:/C:/NetBeansProject/HallReservationProject/src/java/model/model/User.java</file>
             <file>file:/C:/NetBeansProject/HallReservationProject/web/login.xhtml</file>
