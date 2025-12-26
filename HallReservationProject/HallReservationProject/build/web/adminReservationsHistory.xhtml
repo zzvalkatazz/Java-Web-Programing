@@ -1,0 +1,151 @@
+    <!DOCTYPE html>
+    <html xmlns="http://www.w3.org/1999/xhtml"
+          xmlns:h="http://xmlns.jcp.org/jsf/html"
+          xmlns:f="http://xmlns.jcp.org/jsf/core"
+          xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <title>История на заявки (Админ)</title>
+    </h:head>
+
+    <h:body>
+
+    <h:form id="histForm">
+        <p:growl id="msgs" showDetail="true" life="6000"/>
+
+        <f:event type="preRenderView" listener="#{adminReservationHistoryBean.load}" />
+
+        <p:panel header="История на всички резервации"
+                 rendered="#{loginBean.admin}"
+               style="width:95%;margin:20px auto;">
+
+            <p:toolbar style="margin-bottom:10px">
+                <p:toolbarGroup>
+                    <p:commandButton value="Обнови" icon="pi pi-refresh"
+                                     actionListener="#{adminReservationHistoryBean.load}"
+                                     update=":histForm:table :histForm:msgs"
+                                     process="@this"/>
+               
+                  
+                </p:toolbarGroup>
+                 <p:toolbarGroup align="right">
+                   <p:commandButton icon="pi pi-times"
+                             value="Назад"
+                             action="/halls.xhtml?faces-redirect=true"
+                             ajax="false"
+                             styleClass="ui-button-danger"/>
+             </p:toolbarGroup>       
+            </p:toolbar>
+           
+
+            <p:dataTable id="table"
+                         value="#{adminReservationHistoryBean.all}"
+                         var="r"
+                         paginator="true"
+                         rows="15"
+                         emptyMessage="Няма записи."
+                         style="width:100%"
+                         filterEvent="keyup">
+
+                <p:column headerText="Име" style="width:320px" filterBy="#{r.user.fullName}">
+                    <h:outputText value="#{r.user.fullName}" />
+                </p:column>
+
+                <p:column headerText="Начало" style="width:220px" filterBy="#{r.startTime}">
+                    <h:outputText value="#{r.startTime}" />
+                </p:column>
+
+                <p:column headerText="Статус" style="width:140px;text-align:center" filterBy="#{r.status}">
+                    <h:outputText value="#{r.status}"
+                                  styleClass="#{adminReservationHistoryBean.statusClass(r.status)}"/>
+                </p:column>
+
+                <p:column headerText="Действия" style="width:270px;text-align:center">
+
+
+                    <p:commandButton value="Детайли" icon="pi pi-info-circle"
+                                     process="@this"
+                                     actionListener="#{adminReservationHistoryBean.openDetails(r)}"
+                                     update=":histForm:dlgContent"
+                                     oncomplete="PF('infoDlg').show();" />
+
+
+                    <p:commandButton value="Approve" icon="pi pi-check"
+                                     style="margin-left:6px"
+                                     process="@this"
+                                     actionListener="#{adminReservationHistoryBean.approve(r)}"
+                                     update=":histForm:table :histForm:msgs"
+                                     onclick="return confirm('Да одобря ли?');"/>
+
+
+                    <p:commandButton value="Reject" icon="pi pi-times"
+                                     style="margin-left:6px"
+                                     process="@this"
+                                     actionListener="#{adminReservationHistoryBean.reject(r)}"
+                                     update=":histForm:table :histForm:msgs"
+                                     onclick="return confirm('Да откажа ли?');"/>
+                    
+                    <p:commandButton value="Cancel" icon="pi pi-times"
+                                     style="margin-left:6px"
+                                     process="@this"
+                                     actionListener="#{adminReservationHistoryBean.cancel(r)}"
+                                     update=":histForm:table :histForm:msgs"
+                                     onclick="return confirm('Да отменя  ли?');"/>
+                </p:column>
+            </p:dataTable>
+
+
+            <p:dialog widgetVar="infoDlg"
+                      header="Информация"
+                      modal="true"
+                      closable="true"
+                      resizable="false"
+                      width="520">
+
+                <h:panelGrid id="dlgContent" columns="2" cellpadding="6" style="width:100%">
+
+                    <h:outputText value="Потребител:" style="font-weight:bold"/>
+                    <h:outputText value="#{adminReservationHistoryBean.selected.user.username}" />
+
+                    <h:outputText value="Име:" style="font-weight:bold"/>
+                    <h:outputText value="#{adminReservationHistoryBean.selected.user.fullName}" />
+
+                    <h:outputText value="Email:" style="font-weight:bold"/>
+                    <h:outputText value="#{adminReservationHistoryBean.selected.user.email}" />
+
+                    <h:outputText value="Зала:" style="font-weight:bold"/>
+                    <h:outputText value="#{adminReservationHistoryBean.selected.hall.name} (#{adminReservationHistoryBean.selected.hall.location})" />
+
+                    <h:outputText value="Начало:" style="font-weight:bold"/>
+                    <h:outputText value="#{adminReservationHistoryBean.selected.startTime}" />
+
+                    <h:outputText value="Край:" style="font-weight:bold"/>
+                    <h:outputText value="#{adminReservationHistoryBean.selected.endTime}" />
+
+                    <h:outputText value="Тип:" style="font-weight:bold"/>
+                    <h:outputText value="#{adminReservationHistoryBean.selected.eventType}" />
+
+                    <h:outputText value="Статус:" style="font-weight:bold"/>
+                    <h:outputText value="#{adminReservationHistoryBean.selected.status}"
+                                  styleClass="#{adminReservationHistoryBean.statusClass(adminReservationHistoryBean.selected.status)}"/>
+
+                </h:panelGrid>
+
+                <p:separator/>
+
+                <p:commandButton value="Затвори" icon="pi pi-times"
+                                 type="button" onclick="PF('infoDlg').hide();"
+                                 style="width:100%"/>
+            </p:dialog>
+
+        </p:panel>
+    </h:form>
+
+    <h:outputStylesheet>
+    .st-ok{color:#2e7d32;font-weight:bold;}
+    .st-pend{color:#f9a825;font-weight:bold;}
+    .st-rej{color:#c62828;font-weight:bold;}
+    .st-can{color:#ffa500;;font-weight:bold;}
+    </h:outputStylesheet>
+     </h:body>
+    </html>

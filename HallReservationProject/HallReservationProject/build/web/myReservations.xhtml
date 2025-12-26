@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Моите резервации</title>
+</h:head>
+    <style>
+.status-pending  { color: #d4a100; font-weight: bold; }  
+.status-approved { color: #2e7d32; font-weight: bold; } 
+.status-rejected { color: #c62828; font-weight: bold; }
+.status-canceled { color: #ffa500; font-weight: bold; } 
+</style>
+<h:body>
+
+<h:form id="myForm">
+    <p:growl id="msgs" showDetail="true" life="4000"/>
+
+    <p:panel header="Моите резервации"
+             rendered="#{loginBean.user}"
+             style="max-width:1000px;margin:20px auto;">
+
+        <f:event type="preRenderView" listener="#{userReservationBean.load}" />
+
+        <p:dataTable id="table"
+                     value="#{userReservationBean.myReservations}"
+                     var="r"
+                     paginator="true"
+                     rows="10"
+                     emptyMessage="Нямате резервации."
+                     style="width:100%">
+
+            <p:column headerText="Зала">
+                <h:outputText value="#{r.hall.name} (#{r.hall.location})"/>
+            </p:column>
+
+            <p:column headerText="Начало" style="width:180px">
+                <h:outputText value="#{r.startTime}"/>
+            </p:column>
+
+            <p:column headerText="Край" style="width:180px">
+                <h:outputText value="#{r.endTime}"/>
+            </p:column>
+
+            <p:column headerText="Тип" style="width:140px">
+                <h:outputText value="#{r.eventType}"/>
+            </p:column>
+
+            <p:column headerText="Статус" style="width:130px;text-align:center">
+                <h:outputText value="#{r.status}"
+                 styleClass="#{
+                      r.status eq 'PENDING'  ? 'status-pending'  :
+                      r.status eq 'APPROVED' ? 'status-approved' :
+                      r.status eq 'REJECTED' ? 'status-rejected' :
+                       r.status eq 'CANCELED' ? 'status-canceled' :
+                      ''
+                  }"/>
+                
+            </p:column>
+      
+            <p:column headerText="Действия" style="width:160px;text-align:center">
+                <p:commandButton value="Отмени"
+                 icon="pi pi-ban"
+                 actionListener="#{userReservationBean.cancel(r)}"
+                 update=":myForm:table :myForm:msgs"
+                 process="@this"
+                 disabled="#{!userReservationBean.canCancel(r)}"
+                 onclick="return confirm('Да отменя ли резервацията?');"/>
+            </p:column>
+
+        </p:dataTable>
+
+        <p:separator/>
+
+        <p:commandButton value="Назад към зали"
+                         icon="pi pi-arrow-left"
+                         action="/halls.xhtml?faces-redirect=true"
+                         ajax="false"/>
+    </p:panel>
+
+</h:form>
+
+</h:body>
+</html>
