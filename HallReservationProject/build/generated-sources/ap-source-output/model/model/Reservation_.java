@@ -7,7 +7,7 @@ import javax.persistence.metamodel.StaticMetamodel;
 import model.model.Hall;
 import model.model.User;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2025-12-24T17:42:19")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2025-12-27T20:05:20")
 @StaticMetamodel(Reservation.class)
 public class Reservation_ { 
 

@@ -1,64 +1,66 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
 
-<h:head>
-    <title>Вход</title>
-</h:head>
+    <!DOCTYPE html>
+    <html xmlns="http://www.w3.org/1999/xhtml"
+          xmlns:h="http://xmlns.jcp.org/jsf/html"
+          xmlns:f="http://xmlns.jcp.org/jsf/core"
+          xmlns:p="http://primefaces.org/ui">
 
-<h:body>
+    <h:head>
+        <title>Вход в системата</title>
+    </h:head>
 
-    <h:form id="loginForm">
+    <h:body style="background-color: #f4f4f4;">
 
-        <p:growl id="msgs" showDetail="true" life="4000" />
+        <h:form id="loginForm">
+            <p:growl id="msgs" showDetail="true" life="4000" />
 
-        <p:panel header="Вход в системата" style="max-width:420px;margin:60px auto;">
+            <p:panel header="Вход в системата" 
+                     style="max-width:450px; margin:100px auto; padding: 10px;">
 
-            <p:outputLabel for="username" value="Потребител:" />
-            <p:inputText id="username"
-                         value="#{loginBean.username}"
-                         required="true"
-                         requiredMessage="Въведи потребителско име." />
+                <h:panelGrid columns="1" style="width:100%;" cellpadding="10">
 
-            <p:spacer height="10" />
+                    <h:panelGroup>
+                        <p:outputLabel for="username" value="Потребителско име" style="font-weight:bold; display:block; margin-bottom:5px;" />
+                        <p:inputText id="username" value="#{loginBean.username}" 
+                                     required="true" requiredMessage="Въведете потребител"
+                                     style="width:100%; box-sizing: border-box;" />
+                    </h:panelGroup>
 
-            <p:outputLabel for="password" value="Парола:" />
-            <p:password id="password"
-                        value="#{loginBean.password}"
-                        required="true"
-                        requiredMessage="Въведи парола."
-                        feedback="false" />
+                    <h:panelGroup>
+                        <p:outputLabel for="password" value="Парола" style="font-weight:bold; display:block; margin-bottom:5px;" />
+                        <p:password id="password" value="#{loginBean.password}" 
+                                    required="true" requiredMessage="Въведете парола"
+                                    feedback="false" style="width:100%; box-sizing: border-box;" />
+                    </h:panelGroup>
 
-            <p:spacer height="5" />
-   
-            <p:commandButton value="Вход"
-                             action="#{loginBean.login}"
-                             process="@form"
-                             update="@form msgs"
-                             ajax="false"
-                             style="width:100%;" />
+                    <p:commandButton value="Влез в системата"
+                                     action="#{loginBean.login}"
+                                     update="msgs"
+                                     ajax="false"
+                                     icon="pi pi-sign-in"
+                                     style="width:100%; height:45px; margin-top:10px;" />
 
-            <p:spacer height="10" />
-            
-             <h:outputText value="При забравена парола: " style="font-weight:bold"/>
-                <h:panelGroup >
-        <h:outputLink value="mailto:#{loginBean.adminEmail}">
-            <h:outputText value="#{loginBean.adminEmail}" />
-        </h:outputLink>
-            </h:panelGroup>
-             
-              <p:spacer height="10" />
-            
-            <p:button value="Нямам профил (Регистрация)"
-                      outcome="register.xhtml"
-                      style="width:100%;" />
+                </h:panelGrid>
 
-        </p:panel>
+                <p:separator style="margin: 20px 0;" />
 
-    </h:form>
+                <h:panelGrid columns="1" style="width:100%; text-align:center;" cellpadding="5">
 
-</h:body>
-</html>
+                    <h:panelGroup>
+                        <h:outputText value="Забравена парола? " style="color:#666;" />
+                        <h:outputLink value="mailto:#{loginBean.adminEmail}" style="color:#2196F3; font-weight:bold;">
+                            <h:outputText value="Пишете на админ" />
+                        </h:outputLink>
+                    </h:panelGroup>
+
+                    <p:button value="Регистрация на нов акаунт"
+                              outcome="register.xhtml"
+                              icon="pi pi-user-plus"
+                              style="width:100%; margin-top:15px; background:none; color:#666; border:1px solid #ccc;" />
+                </h:panelGrid>
+
+            </p:panel>
+        </h:form>
+
+    </h:body>
+    </html>

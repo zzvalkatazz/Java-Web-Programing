@@ -16,10 +16,7 @@ import model.model.Reservation;
 import service.ReservationService;
 
 
-/**
- *
- * @author vk300
- */
+
 @ManagedBean
 @SessionScoped
 public class AdminReservationBean implements Serializable{

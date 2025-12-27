@@ -15,11 +15,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-/**
- * @author vk300
- */
+
 @Entity
-@Table(name = "hall")                     // да пази стойностите между заявките
+@Table(name = "hall")                     
 public class Hall implements Serializable {
 
     @Id
@@ -45,7 +43,7 @@ public class Hall implements Serializable {
     public Hall() {
     }
 
-    // --- гетъри / сетъри ---
+    
 
     public Long getId() {
         return id;
