@@ -44,7 +44,7 @@ public class Reservation implements Serializable {
     @JoinColumn(name = "user_id")   
     private User user;
 
-    // ✅ добави това
+
     @ManyToOne(optional = false)
     @JoinColumn(name = "hall_id")   
     private Hall hall;
